@@ -27,6 +27,7 @@ public:
 		this->y = y;
 	}
 	//constructors
+
 	/*Point()
 	{
 		x = y = 0;
@@ -55,18 +56,26 @@ public:
 	{
 		cout << "Descructor:\t" << this << endl;
 	}
+
 	//Operators
+
 	void operator=(const Point& other)
 	{
 		this->x = other.x;
 		this->y = other.y;
 		cout << "CopyAssignment: " << this << endl;
 	}
+
 	//methods
 
 	void print()const
 	{
 		cout << "X=" << x << tab << "Y=" << y << endl;
+	}
+	double distance()
+	{
+		double distance = sqrt(pow(x, 2) + pow(y, 2));
+			return distance;
 	}
 };
 
@@ -75,6 +84,13 @@ public:
 
 
 //#define STRUCT
+//#define CONSTRUCT
+
+//functions
+
+double distance(Point A, Point B);
+
+
 void main()
 {
 	setlocale(LC_ALL, "Russian");
@@ -95,10 +111,11 @@ void main()
 
 #endif // STRUCT
 
+#ifdef CONSTRUCT
 	Point A; //default constructor
-	/*A.set_x(2);
-	A.set_y(3);*/
-	//cout << A.get_x() << tab << A.get_y() << endl;
+/*A.set_x(2);
+A.set_y(3);*/
+//cout << A.get_x() << tab << A.get_y() << endl;
 	A.print();
 
 	Point B(2, 3);
@@ -111,6 +128,25 @@ void main()
 	D.print();
 
 	Point E; //Default constructor
-	E = D; //copy asssignment
+	E = D; //copy assignment
 	E.print();
+#endif // CONSTRUCT
+
+	Point A(2.5, 3.5);
+	cout << "точка А" << endl;
+	A.print();
+	cout << "Расстояние до точки "<<A.distance() << endl;
+
+	Point B(2, 3);
+	cout << "точка B" << endl;
+	B.print();
+	cout<< "Расстояние между точками " << distance(A, B)<<endl;
+
+}
+
+double distance(Point A, Point B)
+{
+	double distance = sqrt(pow((A.get_x() - B.get_x()), 2) + pow((A.get_y() - B.get_y()), 2));
+
+	return distance;
 }
