@@ -1,10 +1,10 @@
-#include<iostream>
+п»ї#include<iostream>
 
 using namespace std;
 
 #define tab "\t"
 
-class Point  // тип данных Point
+class Point  // С‚РёРї РґР°РЅРЅС‹С… Point
 {
 
 	double x;
@@ -79,8 +79,8 @@ public:
 	}
 };
 
-// структура - это тип данных
-// класс - это тип данных
+// СЃС‚СЂСѓРєС‚СѓСЂР° - СЌС‚Рѕ С‚РёРї РґР°РЅРЅС‹С…
+// РєР»Р°СЃСЃ - СЌС‚Рѕ С‚РёРї РґР°РЅРЅС‹С…
 
 
 //#define STRUCT
@@ -96,16 +96,16 @@ void main()
 	setlocale(LC_ALL, "Russian");
 #ifdef STRUCT
 	// type name;
-	int a; // объявляем переменную а типа int
-	Point A; // объявляем переменную А типа Point
-			 // объявляем объект стркутуры Point
-			 // создаем экземпляр струкртруы Point
+	int a; // РѕР±СЉСЏРІР»СЏРµРј РїРµСЂРµРјРµРЅРЅСѓСЋ Р° С‚РёРїР° int
+	Point A; // РѕР±СЉСЏРІР»СЏРµРј РїРµСЂРµРјРµРЅРЅСѓСЋ Рђ С‚РёРїР° Point
+			 // РѕР±СЉСЏРІР»СЏРµРј РѕР±СЉРµРєС‚ СЃС‚СЂРєСѓС‚СѓСЂС‹ Point
+			 // СЃРѕР·РґР°РµРј СЌРєР·РµРјРїР»СЏСЂ СЃС‚СЂСѓРєСЂС‚СЂСѓС‹ Point
 
 	A.x = 2;
 	A.y = 3;
 	cout << A.x << tab << A.y << endl;
 
-	Point* pA = &A; // создаем указатель на Point
+	Point* pA = &A; // СЃРѕР·РґР°РµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° Point
 	cout << pA->x << tab << pA->y << endl;
 	cout << (*pA).x << tab << (*pA).y << endl;
 
@@ -133,14 +133,14 @@ A.set_y(3);*/
 #endif // CONSTRUCT
 
 	Point A(2.5, 3.5);
-	cout << "точка А" << endl;
+	cout << "С‚РѕС‡РєР° Рђ" << endl;
 	A.print();
-	cout << "Расстояние до точки "<<A.distance() << endl;
+	cout << "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РґРѕ С‚РѕС‡РєРё "<<A.distance() << endl;
 
 	Point B(2, 3);
-	cout << "точка B" << endl;
+	cout << "С‚РѕС‡РєР° B" << endl;
 	B.print();
-	cout<< "Расстояние между точками " << distance(A, B)<<endl;
+	cout<< "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ С‚РѕС‡РєР°РјРё " << distance(A, B)<<endl;
 
 }
 
