@@ -29,7 +29,8 @@ public:
 	}
 	void set_den(int den)
 	{
-		this->den = den;
+		if (den > 0)this->den = den;
+		else this->den = 1;
 	}
 	void set_int_part(int int_part)
 	{
@@ -38,12 +39,38 @@ public:
 
 	// constructors
 
-	Fraction(int num = 0, int den = 0, int int_part=0)
+	Fraction()
 	{
+		int_part = 0;
+		num = 0;
+		den = 1;
+		cout << "constructor 0\t" << this << endl;
+	}
+	explicit Fraction(int int_part)
+	{
+		this->int_part = int_part;
+		this->num = 0;
+		this->den = 1;
+		cout << "constructor 1\t" << this << endl;
+	}
+	Fraction(double decimal)
+	{
+		
+	}
+	Fraction(int num, int den)
+	{
+		this->int_part = 0;
 		this->num = num;
 		this->den = den;
+		cout << "constructor 2\t" << this << endl;
+	}
+
+	Fraction(int int_part ,int num , int den )
+	{
+		this->num = num;
+		this->set_den(den);
 		this->int_part = int_part;
-		//cout << "Consctructor\t" << this << endl;
+		cout << "Consctructor3\t" << this << endl;
 	}
 	Fraction(const Fraction& other)
 	{
@@ -128,6 +155,22 @@ public:
 		return old;
 	}
 
+	// Type cast operators
+	explicit operator int()const
+	{
+		return int_part;
+	}
+	explicit operator double()const
+	{
+		double frac_part = double(num) / den;
+		double result = int_part+frac_part;
+		return result;
+	}
+	operator char()const
+	{
+		return int_part;
+	}
+
 	//methods
 
 	void print()const
@@ -177,9 +220,13 @@ bool operator<(const Fraction& left, const Fraction& right);
 bool operator>=(const Fraction& left, const Fraction& right);
 bool operator<=(const Fraction& left, const Fraction& right);
 
+//#define HOMEWORK
+#define TYPE_CONVERSIONS
 void main()
 {
 	setlocale(LC_ALL, "Rus");
+	
+#ifdef HOMEWORK
 	cout << "Fraction:" << endl;
 	Fraction A(12, 5);
 	A.print();
@@ -193,14 +240,14 @@ void main()
 	A.print();
 
 	cout << "Reduce:" << endl;
-	Fraction B(5,15);
+	Fraction B(5, 15);
 	B.print();
 	B.reduce();
 	B.print();
 
 	cout << "Operator '=' " << endl;
 	A.print();
-	 A = B;
+	A = B;
 	A.print();
 
 	cout << "Operator '+' " << endl;
@@ -221,9 +268,9 @@ void main()
 	F = D / E;
 	F.print();
 
-	
+
 	cout << "Operator '+=' " << endl;
-	F +=D ;
+	F += D;
 	F.print();
 
 	cout << "Operator '-=' " << endl;
@@ -247,11 +294,11 @@ void main()
 	F--;
 	F.print();
 
-	cout << "Введите числитель, знаменатель и целую часть(0 если отсутвует) "; 
+	cout << "Введите числитель, знаменатель и целую часть(0 если отсутвует) ";
 	cin >> F;
-	cout << F<<endl;
-	
-	cout << "Operator =="<<endl;
+	cout << F << endl;
+
+	cout << "Operator ==" << endl;
 	cout << (F == D) << endl;
 
 	cout << "Operator !=" << endl;
@@ -268,6 +315,53 @@ void main()
 
 	cout << "Operator <=" << endl;
 	cout << (F <= D) << endl;
+#endif // HOMEWORK
+#ifdef TYPE_CONVERSIONS
+//// явное 
+//
+//	cout << (char)43 << endl;  //С-like style 
+//	cout<<char(43) << endl; // functional style
+//	// неявные преобразования 
+//	int a = 2; //  no conversion
+//	double b = 3.4;
+//	cout << a * b << endl; // оператор * неявно преобразует переменную а в тип double чтобы вернуть результат double
+//	double c = 4; // convert int to double от меньшего к большему 
+//	int d = c; // от большего к меньшему без потери данных
+//	int e = 2.5; // от большего к меньшему с потерей данных
+
+	Fraction A(2, 3, 4);
+	cout << A << endl;
+	int a = (int)A;
+	cout << a << endl;
+	double b = (double)A;
+	cout << b << endl;
+	int c = (int)A;
+	cout << c << endl;
+
+	Fraction B = (Fraction)3; //implicit convertion from int to fraction
+	// неявное преобразование значение 3 типа int во frACTION ЭТО возможно благодаря конструктору с 1 параметром 
+	cout << B << endl;
+	B.to_proper();
+	cout<<B<<endl;
+	Fraction C(5);
+	cout << C << endl;
+
+	Fraction E = 2.7;
+	cout << E << endl;
+
+#endif // TYPE_CONVERSIONS
+
+	/*
+	* operator type()
+	* ......
+	* return value;
+	* 
+	* 
+	* operator int()
+	* {
+	* return value;
+	* }
+	*/
 }
 
 
