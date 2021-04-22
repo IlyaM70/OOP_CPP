@@ -55,6 +55,7 @@ public:
 	}
 	Fraction(double decimal)
 	{
+		while(decimal%1==0)
 		
 	}
 	Fraction(int num, int den)
