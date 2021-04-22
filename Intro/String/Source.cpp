@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 #define delimiter "-----------------------------------------"
@@ -7,8 +7,8 @@ String operator+(const String& left, const String& right);
 
 class String
 {
-	int size; //размер строки в байтах
-	char* str; //указатель на строку 
+	int size; //СЂР°Р·РјРµСЂ СЃС‚СЂРѕРєРё РІ Р±Р°Р№С‚Р°С…
+	char* str; //СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃС‚СЂРѕРєСѓ 
 
 public:
 
@@ -35,7 +35,7 @@ public:
 	}
 	String(const char str[])
 	{
-		this->size = strlen(str) + 1;// с учетом нуля
+		this->size = strlen(str) + 1;// СЃ СѓС‡РµС‚РѕРј РЅСѓР»СЏ
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++)
 			this->str[i] = str[i];
@@ -53,7 +53,7 @@ public:
 	{
 		this->size = other.size;
 		this->str = other.str;
-		other.str = nullptr;//указатель на ноль (NULL pointer) - указатель в никуда
+		other.str = nullptr;//СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РЅРѕР»СЊ (NULL pointer) - СѓРєР°Р·Р°С‚РµР»СЊ РІ РЅРёРєСѓРґР°
 		cout << "MoveConstructor:\t" << this << endl;
 	}
 	~String()
@@ -140,7 +140,7 @@ void main()
 	String str1 = "Hello";
 	String str2 = "World";
 	cout << delimiter << endl;
-	String str3 = str1 + str2; // operator + будет выполнять конкатенацию (слияние) строк
+	String str3 = str1 + str2; // operator + Р±СѓРґРµС‚ РІС‹РїРѕР»РЅСЏС‚СЊ РєРѕРЅРєР°С‚РµРЅР°С†РёСЋ (СЃР»РёСЏРЅРёРµ) СЃС‚СЂРѕРє
 	cout << delimiter << endl;
 	cout << str3 << endl;
 	
