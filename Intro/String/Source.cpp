@@ -49,7 +49,7 @@ public:
 			this->str[i] = other.str[i];
 			cout << "CopyConstructor:\t" << this << endl;
 	}
-	String(String&& other)
+	String (String&& other)
 	{
 		this->size = other.size;
 		this->str = other.str;
@@ -74,6 +74,14 @@ public:
 		cout << "CopyAssignment:\t" << this << endl;
 		return *this;
 	}
+	String& operator=(String&& other)
+	{
+		this->size = other.size;
+		this->str = other.str;
+		other.str = nullptr;
+		cout << "MoveAssignment:\t" << this << endl;
+	}
+
 	String& operator+= (const String& other)
 	{
 		return *this = *this + other;
@@ -100,6 +108,22 @@ String operator+(const String& left, const String& right)
 		result.get_str()[i + left.get_size() - 1] = right.get_str()[i];
 	return result;
 }
+bool operator==(const String& left, const String& right)
+{
+	int size = left.get_size();
+	for (int i = 0; i < size; i++)
+	{
+		if (left.get_str()[i] != right.get_str()[i]) return false;
+		else return true;
+	}
+	
+}
+bool operator!=(const String& left, const String& right)
+{
+	return !(left == right);
+}
+
+
 
 
 
@@ -108,6 +132,8 @@ String operator+(const String& left, const String& right)
 
 //#define CONSTRUCTORS_CHECK
 //#define ASSIGNMEND_CHECK
+//#define OPERATOR_PLUS_CHECK
+//define MOVE_ASSIGNMENT
 
 
 void main()
@@ -137,18 +163,32 @@ void main()
 	cout << "str2: " << str2 << endl;
 #endif // ASSIGNMENT_CHECK
 
+#ifdef OPERATOR_PLUS_CHECK
 	String str1 = "Hello";
 	String str2 = "World";
 	cout << delimiter << endl;
 	String str3 = str1 + str2; // operator + будет выполнять конкатенацию (слияние) строк
 	cout << delimiter << endl;
 	cout << str3 << endl;
-	
-	
+
+
 	/*cout << delimiter << endl;
 	str1 += str2;
 	cout << str1 << endl;*/
-	
+#endif // OPERATOR_PLUS_CHECK
+
+#ifdef MOVE_ASSIGNMENT
+	String str1 = "Hello";
+	cout << "str1 " << str1 << endl;
+	String str2;
+	str2 = str1;
+	cout << "str2 " << str2 << endl;
+#endif // MOVE_ASSIGNMENT
+
+	String str1 = "Hello";
+	String str2 = "Hello";
+	cout << (str1 == str2) << endl;
+	cout << (str1 != str2) << endl;
 	
 	
 
