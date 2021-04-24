@@ -133,7 +133,8 @@ bool operator!=(const String& left, const String& right)
 //#define CONSTRUCTORS_CHECK
 //#define ASSIGNMEND_CHECK
 //#define OPERATOR_PLUS_CHECK
-//define MOVE_ASSIGNMENT
+//#define MOVE_ASSIGNMENT
+#define MATCHING_OPERATORS
 
 
 void main()
@@ -185,10 +186,13 @@ void main()
 	cout << "str2 " << str2 << endl;
 #endif // MOVE_ASSIGNMENT
 
+#ifdef MATCHING_OPERATORS
 	String str1 = "Hello";
 	String str2 = "Hello";
 	cout << (str1 == str2) << endl;
 	cout << (str1 != str2) << endl;
+#endif // MATCHING_OPERATORS
+
 	
 	
 
