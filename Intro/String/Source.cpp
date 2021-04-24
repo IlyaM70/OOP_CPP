@@ -27,29 +27,30 @@ public:
 	}
 
 	//constructors:
-	explicit String(int size=80)
+	explicit String(int size=80):
+		size(size),str(new char[size]{})//список инициализации
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 		cout <<(size==80 ? "Default": "Size")<<"Constructor: \t" << this << endl;
 	}
-	String(const char str[])
+	String(const char str[]):String(strlen(str)+1)
 	{
-		this->size = strlen(str) + 1;// с учетом нуля
-		this->str = new char[size] {};
+		//this->size = strlen(str) + 1;//это выполнит первый конструктор
+		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++)
 			this->str[i] = str[i];
 		cout << "Constructor:\t\t" << this << endl;
 	}
-	String(const String& other)
+	String(const String& other): String(other.str)
 	{
-		this->size = other.size;
+		/*this->size = other.size;
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++)
-			this->str[i] = other.str[i];
+			this->str[i] = other.str[i];*/
 			cout << "CopyConstructor:\t" << this << endl;
 	}
-	String (String&& other)
+	String (String&& other):size(other.size),str(other.str)
 	{
 		this->size = other.size;
 		this->str = other.str;
@@ -132,9 +133,10 @@ bool operator!=(const String& left, const String& right)
 
 //#define CONSTRUCTORS_CHECK
 //#define ASSIGNMEND_CHECK
-//#define OPERATOR_PLUS_CHECK
+#define OPERATOR_PLUS_CHECK
 //#define MOVE_ASSIGNMENT
-#define MATCHING_OPERATORS
+//#define MATCHING_OPERATORS
+//#define CONSTRUCTORS_CALLING
 
 
 void main()
@@ -171,6 +173,8 @@ void main()
 	String str3 = str1 + str2; // operator + будет выполнять конкатенацию (слияние) строк
 	cout << delimiter << endl;
 	cout << str3 << endl;
+	String str4 = str3;
+	cout << str4 << endl;
 
 
 	/*cout << delimiter << endl;
@@ -193,7 +197,24 @@ void main()
 	cout << (str1 != str2) << endl;
 #endif // MATCHING_OPERATORS
 
-	
-	
+#ifdef CONSTRUCTORS_CALLING
+	String str; // default constructor
+	str.print();
+	String str1(5);
+	str1.print();
+	String str2 = "Hello"; // single-argument constructor
+	str2.print();
+	String str3("Hello"); // single-argument constructor
+	str3.print();
+
+	String str4(); // НЕ конструктор по умолчанию,
+				   // объявляется функция str4 которая ничего не принимает и возращает значение типа String
+	//str4.
+	String str5; // НЕ явный вызов конструктора по умолчанию
+	String str6{}; //явный вызов конструктора по умолчанию
+	str6.print();
+
+	String("Привет").print(); // явный вызов конструктора для создания временного безымянного объекта  
+#endif // CONSTRUCTORS_CALLING
 
 }
