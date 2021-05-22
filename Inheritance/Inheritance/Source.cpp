@@ -65,6 +65,6 @@ void main()
 	box.close();
 	box.info();
 	GiftBox box;
-	box.
+	
 
 }
