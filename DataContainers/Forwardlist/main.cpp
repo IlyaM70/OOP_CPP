@@ -47,6 +47,11 @@ public:
 	}
 	~ForwardList()
 	{
+		Element* Temp = Head;
+		while (Temp->pNext)
+		{
+			pop_front();
+		}
 		cout << "LDestructor:\t" << this << endl;
 	}
 
@@ -189,8 +194,9 @@ void main()
 	list.print();
 	ForwardList list2 = list;
 	list2.print();*/
-	int index;
+
+	/*int index;
 	cout << "Введите индекс удаляемого элемента "; cin >> index;
 	list.erase(index);
-	list.print();
+	list.print();*/
 }
