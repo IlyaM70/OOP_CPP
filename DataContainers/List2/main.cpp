@@ -3,15 +3,17 @@ using namespace std;
 
 #define tab "\t"
 #define delimiter "--------------------------------------------------------"
+
+template <typename T>
 class List
 {
 	class Element
 	{
-		int Data;
+		T Data;
 		Element* pNext;
 		Element* pPrev;
 	public:
-		Element(int Data, Element* pNext = nullptr, Element* pPrev = nullptr)
+		Element(T Data, Element* pNext = nullptr, Element* pPrev = nullptr)
 		{
 			this->Data = Data;
 			this->pNext = pNext;
@@ -22,10 +24,10 @@ class List
 		{
 			cout << "EDestructor:\t" << this << endl;
 		}
-		friend class List;
+		friend class List<T>;
 	}*Head,*Tail;
 
-	class Iterator 
+public:class Iterator 
 	{
 		Element* Temp;
 	public:
@@ -57,11 +59,11 @@ class List
 		{
 			return this->Temp != other.Temp;
 		}
-		const int& operator*() const
+		const T& operator*() const
 		{
 			return Temp->Data;
 		}
-		int& operator*()
+		T& operator*()
 		{
 			return Temp->Data;
 		}
@@ -96,10 +98,10 @@ public:
 		size = 0;
 		cout << "LConstructor:\t" << this << endl;
 	}
-	List(const initializer_list<int>& il) : List()
+	List(const initializer_list<T>& il) : List()
 	{
 		
-		for (int const* it = il.begin(); it != il.end(); it++)
+		for (T const* it = il.begin(); it != il.end(); it++)
 		{
 			push_back(*it);
 		}
@@ -113,7 +115,7 @@ public:
 		cout << "LDestructor:\t" << this << endl;
 	}
 	//////////////////////   Adding elements  ////////////////////////////
-	void push_front(int Data)
+	void push_front(T Data)
 	{
 		if (Head == nullptr && Tail == nullptr)
 		{
@@ -127,7 +129,7 @@ public:
 		Head = New;
 		size++;
 	}
-	void push_back(int Data)
+	void push_back(T Data)
 	{
 		if (Head == nullptr)
 		{
@@ -145,7 +147,7 @@ public:
 		size++;
 
 	}
-	void insert(int index, int Data)
+	void insert(unsigned int index, T Data)
 	{
 		if (index > size-1) return;
 		if (index == 0)
@@ -225,17 +227,19 @@ public:
 			cout << Temp << tab << Temp->pPrev << tab << Temp->Data << tab << Temp->pNext << endl;
 }
 };
+//#define BASE_CHECK
 
 void main()
 {
 	setlocale(LC_ALL, "Russian");
+#ifdef BASE_CHECK
 	int n;
 	cout << "Введите размер списка: "; cin >> n;
-	List list;
+	List<int> list;
 	for (int i = 0; i < n; i++)
 	{
 		list.push_front(rand() % 100);
-		
+
 	}
 	list.print();
 	cout << delimiter << endl;
@@ -247,7 +251,7 @@ void main()
 
 	list.pop_front();
 	list.print();
-	cout << delimiter<< endl;
+	cout << delimiter << endl;
 
 	list.pop_back();
 	list.print();
@@ -260,16 +264,35 @@ void main()
 	list.insert(index, Data);
 	list.print();
 	cout << delimiter << endl;
-	
+
 	cout << "Введите индекс удаляемого элемента: "; cin >> index;
 	list.erase(index);
 	list.print();
 	cout << delimiter << endl;
 
-	List list1 = { 3,5,8,13,21 };
+	List<int> list1 = { 3,5,8,13,21 };
 	for (int i : list1)
 		cout << i << tab;
 	cout << endl;
 	cout << delimiter << endl;
+#endif // BASE_CHECK
 
+
+	List<double> d_list = { 2.5, 3.14 , 5.2, 8.3 };
+	//d_list.print();
+	for (List<double>::Iterator it = d_list.begin(); it != d_list.end(); it++)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+	for (double i : d_list) cout << i << tab; cout << endl;
+
+	List<string> s_list = { "Хорошо","живет","на","свете","Винни-Пух" };
+	//s_list.print();
+	for (List<string>::Iterator it = s_list.begin(); it != s_list.end(); it++)
+	{
+		cout <<*it<< endl;
+	}
+	cout << endl;
+	for (string i : s_list)cout << i << tab; cout << endl;
 }
